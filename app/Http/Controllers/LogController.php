@@ -26,6 +26,17 @@ class LogController extends Controller
         return $data;
     }
 
+    public function latestValue($key_1, $key_2){
+        $data = \App\Logger::where('key_1', '=', $key_1)
+            ->where('key_2', '=', $key_2)
+            ->orderBy('created_at', 'desc')
+            ->first();
+        if($data == ''){
+            return '';
+        }
+        return $data->value;
+    }
+
     public function set($key_1, $key_2, $value){
         $logger = new \App\Logger;
         $logger->key_1 = $key_1;
