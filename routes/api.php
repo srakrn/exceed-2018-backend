@@ -16,3 +16,5 @@ use App\Logger;
 
 Route::get('/view/{key_1}/{key_2}', 'LogController@query');
 Route::get('/view/{key_1}/{key_2}/latest', 'LogController@latest');
+Route::get('/set/{key_1}/{key_2}/{value}', 'LogController@set');
+Route::post('/set/{key_1}/{key_2}/{value}', 'LogController@set');

@@ -25,4 +25,16 @@ class LogController extends Controller
         }
         return $data;
     }
+
+    public function set($key_1, $key_2, $value){
+        $logger = new \App\Logger;
+        $logger->key_1 = $key_1;
+        $logger->key_2 = $key_2;
+        $logger->value = $value;
+        $logger->save();
+        $data = array(
+            'status' => 'success'
+        );
+        return $data;
+    }
 }
