@@ -77,6 +77,16 @@
                 <p>ส่งคืนเป็น JSON บ่งบอกสถานะการทำงาน<p>
             </div>
         </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h3>ดู key_2 ทั้งหมดที่เคยบันทึก</h3>
+                <p><span class="badge badge-danger">POST</span> http://{{ $_SERVER['HTTP_HOST'] }}/api/keys/{key_1}/</p>
+                <p>เมื่อให้ <code>key_1</code> มา ดูว่าคีย์นั้นเคยบันทึกค่า <code>key_2</code> ใดไว้บ้าง</p>
+                <h4>ลักษณะการส่งคืนข้อมูล</h4>
+                <p>ส่งคืนเป็นอาร์เรย์ของค่า <code>key_2</code> ทั้งหมดที่พบ<p>
+            </div>
+        </div>
     </div>
 </div>
 @endsection
