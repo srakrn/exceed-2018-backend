@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Logger;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +16,10 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::get('/view/{key_1}/{key_2}', 'LogController@query');
+
+Route::get('/logs', function(){
+    return App\Logger::all();
 });
