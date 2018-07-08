@@ -14,6 +14,7 @@ class CreateLoggerTable extends Migration
     public function up()
     {
         Schema::create('loggers', function (Blueprint $table) {
+            $table->increments('id');
             $table->string('key_1', 100);
             $table->string('key_2', 100);
             $table->string('value', 100);
