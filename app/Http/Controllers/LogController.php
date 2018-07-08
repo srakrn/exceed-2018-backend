@@ -48,4 +48,11 @@ class LogController extends Controller
         );
         return $data;
     }
+
+    public function keys($key_1){
+        $data = \App\Logger::where('key_1', '=', $key_1)
+            ->select('key_2')->get();
+        $plucked = $data->pluck('key_2')->unique();
+        return $plucked->all();
+    }
 }
