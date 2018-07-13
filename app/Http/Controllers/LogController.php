@@ -6,10 +6,23 @@ use Illuminate\Http\Request;
 
 class LogController extends Controller
 {
-    public function query($key_1, $key_2){
-        return \App\Logger::where('key_1', '=', $key_1)
+    public function query($key_1, $key_2, Request $request){
+        $data = \App\Logger::where('key_1', '=', $key_1)
             ->where('key_2', '=', $key_2)
-            ->get();
+            ->orderBy('id', 'desc');
+        if(isset($request['before'])){
+            $before = (int)$request['before'];
+            $data = $data->where('id', '<', $before);
+        }
+        if(isset($request['after'])){
+            $after = (int)$request['after'];
+            $data = $data->where('id', '>', $after);
+        }
+        if(isset($request['limit'])){
+            $limit = (int)$request['limit'];
+            $data = $data->take($limit);
+        }
+        return $data->get();
     }
 
     public function latest($key_1, $key_2){
