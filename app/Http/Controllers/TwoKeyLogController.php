@@ -68,8 +68,8 @@ class TwoKeyLogController extends Controller
         }
         else{
             $data = array(
-                'status' => 'failed',
-                'error' => 'no value defined'
+                'status' => 'error',
+                'message' => 'no value defined'
             );
         }
         return $data;
