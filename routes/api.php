@@ -14,7 +14,7 @@ use App\Logger;
 |
 */
 
-Route::get('{key}/view', 'LogController@latestValue');
+Route::get('{key}/view/json', 'LogController@latestValue');
 Route::get('{key}/set', 'LogController@set');
 Route::post('{key}/set', 'LogController@set');
 Route::get('{key}/history', 'LogController@query');
