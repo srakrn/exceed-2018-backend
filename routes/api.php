@@ -14,9 +14,14 @@ use App\Logger;
 |
 */
 
-Route::get('/view/{key_1}/{key_2}', 'LogController@query');
-Route::get('/view/{key_1}/{key_2}/latest', 'LogController@latest');
-Route::get('/view/{key_1}/{key_2}/latest/value', 'LogController@latestValue');
-Route::get('/set/{key_1}/{key_2}/{value}', 'LogController@set');
-Route::post('/set/{key_1}/{key_2}/{value}', 'LogController@set');
-Route::get('/keys/{key_1}/', 'LogController@keys');
+Route::get('{key}/view', 'LogController@latestValue');
+Route::get('{key}/set', 'LogController@set');
+Route::post('{key}/set', 'LogController@set');
+Route::get('{key}/history', 'LogController@query');
+
+Route::get('old/view/{key_1}/{key_2}', 'TwoKeyLogController@query');
+Route::get('old/view/{key_1}/{key_2}/latest', 'TwoKeyLogController@latest');
+Route::get('old/view/{key_1}/{key_2}/latest/value', 'TwoKeyLogController@latestValue');
+Route::get('old/set/{key_1}/{key_2}/{value}', 'TwoKeyLogController@set');
+Route::post('old/set/{key_1}/{key_2}/{value}', 'TwoKeyLogController@set');
+Route::get('old/keys/{key_1}/', 'TwoKeyLogController@keys');

@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class LogController extends Controller
+class TwoKeyLogController extends Controller
 {
-    public function query($key, Request $request){
-        $data = \App\Logger::where('key_1', '=', 'exceed_2018')
-            ->where('key_2', '=', $key)
+    public function query($key_1, $key_2, Request $request){
+        $data = \App\Logger::where('key_1', '=', $key_1)
+            ->where('key_2', '=', $key_2)
             ->orderBy('id', 'desc');
         if(isset($request['before'])){
             $before = (int)$request['before'];
@@ -30,9 +30,9 @@ class LogController extends Controller
         return $data->take($limit)->get();
     }
 
-    public function latest($key){
-        $data = \App\Logger::where('key_1', '=', 'exceed_2018')
-            ->where('key_2', '=', $key)
+    public function latest($key_1, $key_2){
+        $data = \App\Logger::where('key_1', '=', $key_1)
+            ->where('key_2', '=', $key_2)
             ->orderBy('created_at', 'desc')
             ->first();
         if($data == ""){
@@ -44,9 +44,9 @@ class LogController extends Controller
         return $data;
     }
 
-    public function latestValue($key){
-        $data = \App\Logger::where('key_1', '=', 'exceed_2018')
-            ->where('key_2', '=', $key)
+    public function latestValue($key_1, $key_2){
+        $data = \App\Logger::where('key_1', '=', $key_1)
+            ->where('key_2', '=', $key_2)
             ->orderBy('created_at', 'desc')
             ->first();
         if($data == ''){
@@ -55,12 +55,12 @@ class LogController extends Controller
         return $data->value;
     }
 
-    public function set($key, Request $request){
+    public function set($key_1, $key_2, Request $request){
         if(isset($request['value'])){
             $logger = new \App\Logger;
-            $logger->key_1 = 'exceed_2018';
-            $logger->key_2 = $key;
-            $logger->value = $request['value'];
+            $logger->key_1 = $key_1;
+            $logger->key_2 = $key_2;
+            $logger->value = $request;
             $logger->save();
             $data = array(
                 'status' => 'success'
@@ -73,5 +73,12 @@ class LogController extends Controller
             );
         }
         return $data;
+    }
+
+    public function keys($key_1){
+        $data = \App\Logger::where('key_1', '=', $key_1)
+            ->select('key_2')->get();
+        $plucked = $data->pluck('key_2')->unique();
+        return $plucked->all();
     }
 }
