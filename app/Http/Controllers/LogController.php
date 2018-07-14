@@ -20,9 +20,14 @@ class LogController extends Controller
         }
         if(isset($request['limit'])){
             $limit = (int)$request['limit'];
-            $data = $data->take($limit);
+            if($limit > 100){
+                $limit = 100;
+            }
         }
-        return $data->get();
+        else{
+            $limit = 10;
+        }
+        return $data->take($limit)->get();
     }
 
     public function latest($key_1, $key_2){
