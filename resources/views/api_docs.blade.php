@@ -8,11 +8,11 @@
 @section('content')
 <div class="row">
     <div class="col-sm">
-        <h1>ลักษณะของเรียก API</h1>
-        <p>API ที่มีให้เป็นลักษณะของ key-value pair หากกล่าวโดยละเอียด ลักษณะการทำงานเหมือนการเก็บข้อมูลในตัวแปร</p>
+        <h1>ลักษณะของ API</h1>
+        <p>API ที่มีให้เป็นลักษณะของ key-value pair หากกล่าวโดยละเอียด ลักษณะการทำงานเหมือนกับโครงสร้างข้อมูล <code>dict</code> ในภาษาไพธอน</p>
         <p>เพื่อไม่ให้ค่าตีกัน ในการเรียกหรือเก็บค่าใดๆ จะต้องระบุคีย์ร่วมกันทั้งหมดสองตัว ได้แก่<p>
         <ul>
-            <li>ชื่อกลุ่ม หรือเลขประจำกลุ่ม (เรียกว่า <code>key_1</code>)</li>
+            <li>ชื่อกลุ่ม หรือเลขประจำกลุ่ม หรือค่าใดก็ได้<b>ที่มั่นใจว่าจะไม่ซ้ำระหว่างกลุ่ม</b> (เรียกว่า <code>key_1</code>)</li>
             <li>ชื่อตัวแปรที่ต้องการจะเก็บ (เรียกว่า <code>key_2</code>)</li>
         </ul>
         <p>เช่น หากกลุ่ม <code>best_exceed_group</code> จะอ่านตัวแปร <code>temperature</code> อาจจะเรียกค่าได้ดังนี้</p>
@@ -21,7 +21,6 @@
         </code></pre>
 
         <h1>เส้นทางที่มีให้ใช้</h1>
-
         <div class="card">
             <div class="card-body">
                 <h3>เรียกดูค่าทั้งหมดที่เคยบันทึก</h3>
@@ -29,8 +28,7 @@
                 <h4>ลักษณะการส่งคืนข้อมูล</h4>
                 <p>ส่งคืนเป็นอาร์เรย์ของ JSON ซึ่งสำหรับสมาชิกทุกตัวในอาร์เรย์ จะเป็น JSON Object ประกอบด้วยฟิลด์ดังนี้<p>
                 <ul>
-                    <li><code>key_1</code>: ค่า key_1 ที่ร้องขอไป</li>
-                    <li><code>key_2</code>: ค่า key_2 ที่ร้องรอไป</li>
+                    <li><code>id</code>: เป็นเลขเฉพาะซึ่งจะไม่ซ้ำกันในข้อมูลทุกการบันทึก</li>
                     <li><code>value</code>: ค่าที่เคยบันทึกไว้</li>
                     <li><code>created_at</code>: เวลาที่เคยบันทึกค่านั้น</li>
                 </ul>
@@ -44,8 +42,7 @@
                 <h4>ลักษณะการส่งคืนข้อมูล</h4>
                 <p>ส่งคืนเป็น JSON Object ประกอบด้วยฟิลด์ดังนี้<p>
                 <ul>
-                    <li><code>key_1</code>: ค่า key_1 ที่ร้องขอไป</li>
-                    <li><code>key_2</code>: ค่า key_2 ที่ร้องรอไป</li>
+                    <li><code>id</code>: เป็นเลขเฉพาะซึ่งจะไม่ซ้ำกันในข้อมูลทุกการบันทึก</li>
                     <li><code>value</code>: ค่าที่เคยบันทึกไว้</li>
                     <li><code>created_at</code>: เวลาที่เคยบันทึกค่านั้น</li>
                 </ul>
@@ -56,6 +53,44 @@
         "message": "No values of this key has been stored before."
     }
                 </pre></code>
+                <div id="accordion">
+                    <div class="card border-secondary">
+                        <div class="card-header" id="headingOne">
+                            รีเควสต์นี้สามารถเรียกพารามิเตอร์ได้เพิ่มเติม
+                            <a href="#" class="btn btn-secondary" data-toggle="collapse" data-target="#view_additional_parameters">
+                                คลิกดูเอกสารพารามิเตอร์เพิ่มเติม
+                            </a>
+                        </div>
+                        <div id="view_additional_parameters" class="collapse" data-parent="#accordion">
+                            <div class="card-body">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>พารามิเตอร์</th>
+                                            <th>ชนิดค่า</th>
+                                            <th>คำอธิบาย</th>
+                                    </tr>
+                                    </thead>
+                                    <tr>
+                                        <td>before</td>
+                                        <td>integer</td>
+                                        <td>เรียกเฉพาะข้อมูลที่มีค่า id น้อยกว่าเลขที่ระบุ</td>
+                                    </tr>
+                                    <tr>
+                                        <td>after</td>
+                                        <td>integer</td>
+                                        <td>เรียกเฉพาะข้อมูลที่มีค่า id มากกว่ากว่าเลขที่ระบุ</td>
+                                    </tr>
+                                    <tr>
+                                        <td>limit</td>
+                                        <td>integer</td>
+                                        <td>กำหนดจำนวนข้อมูลมากที่สุดที่จะเรียก (สูงสุดไม่เกิน 100, หากไม่ระบุจะเท่ากับ 10)</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
