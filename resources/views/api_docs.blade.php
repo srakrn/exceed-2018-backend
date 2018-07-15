@@ -93,6 +93,16 @@
                 <p>ส่งคืนเป็น JSON บ่งบอกสถานะการทำงาน ซึ่งฟิลด์ <code>status</code> เป็น <code>success</code> หรือ <code>error</code> ตามแต่สถานะการทำงาน<p>
             </div>
         </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h3>บันทึกค่า</h3>
+                <p><span class="badge badge-secondary">GET</span> http://{{ $_SERVER['HTTP_HOST'] }}/api/{key}/delete/</p>
+                <p>ลบค่าทั้งหมดที่เคยถูกบันทึกด้วย <code>key</code> ที่ระบุ</p>
+                <h4>ลักษณะการส่งคืนข้อมูล</h4>
+                <p>ส่งคืนเป็นข้อความ บ่งบอกจำนวนแถวที่ลบไปทั้งหมด<p>
+            </div>
+        </div>
     </div>
 </div>
 @endsection
