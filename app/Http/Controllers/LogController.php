@@ -74,4 +74,11 @@ class LogController extends Controller
         }
         return $data;
     }
+
+    public function delete($key){
+        $deleted = \App\Logger::where('key_1', '=', 'exceed_2018')
+            ->where('key_2', '=', $key)
+            ->delete();
+        return $deleted;
+    }
 }

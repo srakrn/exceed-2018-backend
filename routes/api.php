@@ -18,6 +18,7 @@ Route::get('{key}/view', 'LogController@latestValue');
 Route::get('{key}/set', 'LogController@set');
 Route::post('{key}/set', 'LogController@set');
 Route::get('{key}/history', 'LogController@query');
+Route::get('{key}/delete', 'LogController@delete');
 
 Route::get('old/view/{key_1}/{key_2}', 'TwoKeyLogController@query');
 Route::get('old/view/{key_1}/{key_2}/latest', 'TwoKeyLogController@latest');
