@@ -27,7 +27,11 @@ class LogController extends Controller
         else{
             $limit = 10;
         }
-        return $data->take($limit)->get();
+        $data = $data->take($limit)->get();
+        for($i = 0; $i < count($data); $i++){
+            $data[$i]['value'] = htmlspecialchars($data[$i]['value']);
+        }
+        return $data;
     }
 
     public function latest($key){
