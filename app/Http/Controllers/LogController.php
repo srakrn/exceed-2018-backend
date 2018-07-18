@@ -58,9 +58,18 @@ class LogController extends Controller
             ->orderBy('created_at', 'desc')
             ->first();
         if($data == ''){
-            return '';
+            $content = '';
         }
-        return response(htmlspecialchars($data->value), 200)
+        else{
+            $content = $data->value;
+        }
+        $sanitize = (\App\Preference::find('sanitize_results')->value == 'false') ? false : true;
+        if($sanitize){
+            for($i = 0; $i < count($data); $i++){
+                $content = htmlspecialchars($content);
+            }
+        }
+        return response($content, 200)
                   ->header('Content-Type', 'text/plain');
     }
 
