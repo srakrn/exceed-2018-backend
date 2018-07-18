@@ -65,9 +65,7 @@ class LogController extends Controller
         }
         $sanitize = (\App\Preference::find('sanitize_results')->value == 'false') ? false : true;
         if($sanitize){
-            for($i = 0; $i < count($data); $i++){
-                $content = htmlspecialchars($content);
-            }
+            $content = htmlspecialchars($content);
         }
         return response($content, 200)
                   ->header('Content-Type', 'text/plain');
