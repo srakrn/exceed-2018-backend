@@ -96,7 +96,7 @@
 
         <div class="card">
             <div class="card-body">
-                <h3>บันทึกค่า</h3>
+                <h3>ล้างค่า</h3>
                 <p><span class="badge badge-secondary">GET</span> http://{{ $_SERVER['HTTP_HOST'] }}/api/{key}/delete/</p>
                 <p>ลบค่าทั้งหมดที่เคยถูกบันทึกด้วย <code>key</code> ที่ระบุ</p>
                 <h4>ลักษณะการส่งคืนข้อมูล</h4>
