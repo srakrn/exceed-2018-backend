@@ -17,8 +17,37 @@
     </style>
   </head>
   <body>
-    <nav class="navbar sticky-top navbar-dark bg-success">
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-success">
         <a class="navbar-brand" href="#">Exceed 2018 API Documentation</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                @guest
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <span class="navbar-text">
+                            ({{ Auth::user()->name }})
+                        </span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+                    </li>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                @endguest
+            </ul>
+        </div>
     </nav>
 
     <div class="jumbotron">
