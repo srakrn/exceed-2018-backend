@@ -13,11 +13,11 @@ class PreferencesTableSeeder extends Seeder
     {
         DB::table('preferences')->insert([
             'id' => 'sanitize_results',
-            'value' => 'true',
+            'value' => 'true'
         ]);
         DB::table('preferences')->insert([
             'id' => 'max_history_limit',
-            'value' => 100,
+            'value' => '100'
         ]);
     }
 }
