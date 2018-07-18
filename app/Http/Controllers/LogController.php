@@ -52,7 +52,8 @@ class LogController extends Controller
         if($data == ''){
             return '';
         }
-        return $data->value;
+        return response(htmlspecialchars($data->value), 200)
+                  ->header('Content-Type', 'text/plain');
     }
 
     public function set($key, Request $request){
