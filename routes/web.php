@@ -26,4 +26,4 @@ Route::get('/', function () {
 });
 
 // Settings routes
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/preferences', 'PreferencesController@preferences');
