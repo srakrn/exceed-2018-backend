@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 class LogController extends Controller
 {
     public function query($key, Request $request){
+        $max_limit = intval(\App\Preference::find('max_history_limit')->value);
         $data = \App\Logger::where('key_1', '=', 'exceed_2018')
             ->where('key_2', '=', $key)
             ->orderBy('id', 'desc');
@@ -20,16 +21,19 @@ class LogController extends Controller
         }
         if(isset($request['limit'])){
             $limit = (int)$request['limit'];
-            if($limit > 100){
-                $limit = 100;
+            if($limit > $max_limit){
+                $limit = $max_limit;
             }
         }
         else{
             $limit = 10;
         }
         $data = $data->take($limit)->get();
-        for($i = 0; $i < count($data); $i++){
-            $data[$i]['value'] = htmlspecialchars($data[$i]['value']);
+        $sanitize = (\App\Preference::find('sanitize_results')->value == 'false') ? false : true;
+        if($sanitize){
+            for($i = 0; $i < count($data); $i++){
+                $data[$i]['value'] = htmlspecialchars($data[$i]['value']);
+            }
         }
         return $data;
     }
