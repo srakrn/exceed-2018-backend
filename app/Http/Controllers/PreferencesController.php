@@ -26,4 +26,18 @@ class PreferencesController extends Controller
         $preferences = \App\Preference::all();
         return view('preferences')->with('preferences', $preferences);
     }
+
+    public function save(Request $request)
+    {
+        foreach($_POST as $key => $value){
+            if($key != '_token'){
+                $p = \App\Preference::find($key);
+                if($p) {
+                    $p->value = $value;
+                    $p->save();
+                }
+            }
+        }
+        return redirect('preferences');
+    }
 }

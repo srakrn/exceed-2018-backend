@@ -27,3 +27,4 @@ Route::get('/', function () {
 
 // Settings routes
 Route::get('/preferences', 'PreferencesController@preferences');
+Route::post('/preferences/save', 'PreferencesController@save');
