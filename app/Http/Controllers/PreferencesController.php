@@ -23,6 +23,7 @@ class PreferencesController extends Controller
      */
     public function preferences()
     {
-        return view('preferences');
+        $preferences = \App\Preference::all();
+        return view('preferences')->with('preferences', $preferences);
     }
 }
