@@ -10,8 +10,8 @@
         <h1>Database Statistics</h1>
         <table class="table">
             <tr>
-                <td>Newest record ID</td>
-                <td>{{ $last_record->id }}</td>
+                <td width="40%">Newest record ID</td>
+                <td width="60%">{{ $last_record->id }}</td>
             </tr>
             <tr>
                 <td>Newest record made by</td>
