@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 class LogController extends Controller
 {
+    public function by_id($id){
+        $data = \App\Logger::find($id);
+        return $data;
+    }
+
     public function query($key, Request $request){
         $max_limit = intval(\App\Preference::find('max_history_limit')->value);
         $data = \App\Logger::where('key_1', '=', 'exceed_2018')
