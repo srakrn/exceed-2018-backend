@@ -21,9 +21,8 @@ $this->post('login', 'Auth\LoginController@login');
 $this->post('logout', 'Auth\LoginController@logout')->name('logout');
 
 // Homepage routes
-Route::get('/', function () {
-    return view('api_docs');
-});
+Route::get('/', 'StaticPagesController@api_docs');
+Route::get('/stats', 'StaticPagesController@db_stats');
 
 // Settings routes
 Route::get('/preferences', 'PreferencesController@preferences');
